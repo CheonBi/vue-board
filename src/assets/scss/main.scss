@@ -1,0 +1,13 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+@import './base.css';
+
+#app {
+  min-height: 100vh;
+}
+
+
+/*Override Bootstrap */
+$font-family-sans-serif : "Pretendard Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss'
