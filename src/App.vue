@@ -3,9 +3,6 @@
   import CommonNavBar from "./components/commons/CommonNavBar.vue";
   // import CommonSideBar from "./components/commons/CommonSideBar.vue";
   import CommonFooter from "./components/commons/CommonFooter.vue";
-
-
-
 </script>
 
 <template>
