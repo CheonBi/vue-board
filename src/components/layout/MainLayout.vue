@@ -3,9 +3,14 @@
 </script>
 
 <template>
-    <div class="main-content p-4">
-        <RouterView></RouterView>
+
+    <div class="row">
+        <div class="main-content d-flex align-content-center align-self-center p-4">
+            <RouterView></RouterView>
+        </div>
     </div>
+
+
 </template>
 
 <style scoped></style>

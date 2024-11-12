@@ -4,7 +4,7 @@
 
 <template>
     <!-- Navbar -->
-    <header class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <header class="navbar navbar-expand-lg navbar-light bg-body-secondary sticky-top">
         <!-- Container wrapper -->
         <div class="container">
             <!-- Navbar brand -->
@@ -24,25 +24,24 @@
                     </li> -->
 
                     <li class="nav-item fw-bold fs-6">
-                        <RouterLink class="nav-link" :to="{ name: 'attraction' }">여행지</RouterLink>
+                        <RouterLink class="nav-link text-black" :to="{ name: 'attraction' }">여행지</RouterLink>
                     </li>
 
                     <li class="nav-item fw-bold fs-6">
-                        <RouterLink class=" nav-link" :to="{ name: 'planner' }">플래너</RouterLink>
+                        <RouterLink class=" nav-link text-black" :to="{ name: 'planner' }">플래너</RouterLink>
                     </li>
 
                     <li class="nav-item fw-bold fs-6">
-                        <RouterLink class=" nav-link" :to="{ name: 'tour' }">투어</RouterLink>
+                        <RouterLink class=" nav-link text-black" :to="{ name: 'tour' }">투어</RouterLink>
                     </li>
                 </ul>
                 <!-- Left links -->
 
                 <!-- Center Home Link Image  -->
-                <div class="d-flex align-items-center justify-content-center align-self-stretch">
-                    <RouterLink :to="{ name: 'home' }">
+                <div class="navbar-brand align-items-center justify-content-center align-self-stretch">
+                    <RouterLink class="nav-link" :to="{ name: 'home' }">
                         <img src="" alt="프로젝트 로고" />
                     </RouterLink>
-
                 </div>
 
                 <!-- Center Home Link Image  -->

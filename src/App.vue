@@ -7,12 +7,8 @@
 
 <template>
   <CommonNavBar />
-  <div class="container-fluid flex-grow-1 d-flex align-content-center justify-content-center">
-    <div class="row">
-      <!-- <MainLayout></MainLayout> -->
-      <RouterView></RouterView>
-    </div>
-  </div>
+  <RouterView></RouterView>
+  <!-- <MainLayout></MainLayout> -->
   <CommonFooter />
 </template>
 
