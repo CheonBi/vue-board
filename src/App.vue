@@ -1,8 +1,7 @@
 <script setup>
   import { RouterView } from "vue-router";
-  import CommonNavBar from "./components/commons/CommonNavBar.vue";
-  // import CommonSideBar from "./components/commons/CommonSideBar.vue";
-  import CommonFooter from "./components/commons/CommonFooter.vue";
+  import CommonNavBar from "./components/common/CommonNavBar.vue";
+  import CommonFooter from "./components/common/CommonFooter.vue";
 </script>
 
 <template>
