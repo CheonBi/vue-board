@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const { VITE_SEARCH_TRIP_URL } = import.meta.env;
+const { VITE_APP_REST_API_SERVER_ADDRESS } = import.meta.env;
 
 function createAxiosInstance(baseUrl) {
+
   const instance = axios.create({
     baseURL: baseUrl,
     headers: {
@@ -31,12 +32,12 @@ function createAxiosInstance(baseUrl) {
       return Promise.reject(error);
     }
   );
-
+  
   return instance;
 }
 
 function tripAxios() {
-  return createAxiosInstance(VITE_SEARCH_TRIP_URL);
+  return createAxiosInstance(VITE_APP_REST_API_SERVER_ADDRESS);
 }
 
 export { tripAxios };
