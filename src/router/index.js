@@ -31,7 +31,9 @@ const routes = [
     name: "user",
     component : MainLayout,
     children : [
-      {path : "login", name : "login", component: () => import("@/components/users/UserLoginVue.vue")}
+      {path : "login", name : "login", component: () => import("@/components/users/UserLoginVue.vue")},
+      {path : "forgetPass", name : "forgetPass", component: () => import("@/components/users/FindPassVue.vue")},
+      {path : "join", name : "join", component: () => import("@/components/users/JoinUserVue.vue")},
     ],
   }
 ];
