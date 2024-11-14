@@ -1,4 +1,8 @@
 <script setup>
+import MainSelectBox from "@/components/common/MainSelectBox.vue";
+import IconSearch from "@/components/icons/IconSearch.vue";
+import IconCalendar from "@/components/icons/IconCalendar.vue";
+import IconHuman from "@/components/icons/IconHuman.vue";
 
 </script>
 
@@ -13,37 +17,34 @@
       <div class="search-box d-flex flex-column">
         <form class="search-form d-flex" role="search">
           <div class="sido-box">
-            <div class="sido-box-inner">
-              <div class="sido-box-lbl">
-                <div class="sido-box-lbl-inner">
-                  <div class="svg-wrap">
-                    <svg width="20" height="20" viewBox="0 0 20 20" sxmlns="http://www.w3.org/2000/svg"
-                      class="svg-fill d-block">
-                      <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M8.85 16.1a6.707 6.707 0 004.394-1.642l-.027.034 3.4 3.508L18 16.574l-3.47-3.58A7.163 7.163 0 0015.7 9.05C15.7 5.156 12.633 2 8.85 2 5.067 2 2 5.156 2 9.05c0 3.894 3.067 7.05 6.85 7.05zm0-1.99c2.695 0 4.88-2.263 4.88-5.055S11.545 4 8.85 4 3.97 6.263 3.97 9.055s2.185 5.055 4.88 5.055z"
-                        fill="current"></path>
-                    </svg>
-                  </div>
-
-                  <div class="sido-input-wrap">
-                    <input name="sido" type="text" aria-disabled="false" placeholder="여행지나 숙소를 검색해보세요." maxlength="50"
-                      autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" class="sido-input"
-                      value="">
-
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <MainSelectBox :placeholder="`큰 지역을 선택해보세요`">
+              <template #icon>
+                <IconSearch />
+              </template>
+            </MainSelectBox>
           </div>
+
           <div class="gugun-box">
-
+            <MainSelectBox :placeholder="`작은 지역을 선택해보세요`">
+              <template #icon>
+                <IconSearch />
+              </template>
+            </MainSelectBox>
           </div>
-          <div class="date-box">
 
+          <div class="date-box">
+            <MainSelectBox :placeholder="`날짜 선택`">
+              <template #icon>
+                <IconCalendar />
+              </template>
+            </MainSelectBox>
           </div>
           <div class="num-box">
-
+            <MainSelectBox :placeholder="`작은 지역을 선택해보세요`">
+              <template #icon>
+                <IconHuman />
+              </template>
+            </MainSelectBox>
           </div>
           <div class="search-btn-wrap">
             <button class="search-btn d-flex align-items-center justify-content-center" type="button">
@@ -69,142 +70,88 @@
 </template>
 
 <style scoped>
-  .top-search-wrap {
-    height: 464px;
-  }
+.top-search-wrap {
+  height: 464px;
+}
 
-  .top-search {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 11;
-    padding-bottom: 70px;
-  }
+.top-search {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 11;
+  padding-bottom: 70px;
+}
 
-  h1.main-guide {
-    font-weight: 700;
-    color: white;
-    letter-spacing: 0px;
-    line-height: 2.75rem;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
+h1.main-guide {
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0px;
+  line-height: 2.75rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
 
-  /* Search Box */
+/* Search Box */
 
-  .search-box {
-    padding: 20px;
-    /* size */
-    width: 100%;
-    border-radius: 16px;
-    background-color: white;
-    z-index: 11;
-    gap: 20px;
-  }
+.search-box {
+  padding: 20px;
+  /* size */
+  width: 100%;
+  border-radius: 16px;
+  background-color: white;
+  z-index: 11;
+  gap: 20px;
+}
 
-  .search-form {
-    height: 100%;
-    width: 100%;
-    gap: 12px;
-  }
+.search-form {
+  height: 100%;
+  width: 100%;
+  gap: 12px;
+}
 
-  /* search boxes */
-  .svg-wrap {
-    height: 20px;
-    width: 20px;
-    margin-right: 8px;
-  }
+.sido-box {
+  max-width: 298px;
+  flex-basis: 30%;
+}
 
-  .svg-fill {
-    fill: rgb(177, 174, 174);
-  }
+.gugun-box {
+  max-width: 298px;
+  flex-basis: 30%;
+}
 
-  /* # 1. sido-box  */
-  .sido-box {
-    max-width: 420px;
-    flex-basis: 40%;
-  }
+.date-box {
+  max-width: 298px;
+  flex-basis: 35%;
+}
 
-  .sido-box-inner {
-    position: relative;
-  }
+.num-box {
+  max-width: 298px;
+  flex-basis: 30%;
+}
 
-  .sido-box-lbl {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+/* Button */
+.search-btn-wrap {
+  min-width: 120px
+}
 
-  .sido-box-lbl-inner {
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    position: relative;
-    height: 48px;
-    background-color: rgb(245, 245, 245);
-    padding: 4px 14px;
-  }
+.search-btn {
+  /* style */
+  cursor: pointer;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(18, 155, 228);
+  border-style: none;
+  padding: 10px 18px;
+  height: 48px;
+  border-radius: 10px;
+  border-width: 2px;
+  font-size: 1rem;
+  line-height: normal;
+  letter-spacing: 0px;
+  font-weight: 600;
 
-  .sido-input-wrap {
-    height: 20px;
-    width: 100%;
-    position: relative;
-  }
-
-  .sido-input {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0);
-    font-size: 1rem;
-    letter-spacing: 0px;
-    line-height: 1.1rem;
-    font-weight: 600;
-    color: rgb(51 51 51);
-    caret-color: rgb(18, 115, 228);
-  }
-
-  .gugun-box {
-    max-width: 298px;
-    flex-basis: 35%;
-  }
-
-  .date-box {
-    max-width: 298px;
-    flex-basis: 35%;
-  }
-
-  .num-box {
-    min-width: 120px;
-  }
-
-  /* Button */
-  .search-btn-wrap {
-    min-width: 120px
-  }
-
-  .search-btn {
-    /* style */
-    cursor: pointer;
-    width: 100%;
-    color: rgb(255, 255, 255);
-    background-color: rgb(18, 155, 228);
-    border-style: none;
-    padding: 10px 18px;
-    height: 48px;
-    border-radius: 10px;
-    border-width: 2px;
-    font-size: 1rem;
-    line-height: normal;
-    letter-spacing: 0px;
-    font-weight: 600;
-
-  }
-
-
+}
 </style>
