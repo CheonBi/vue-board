@@ -26,6 +26,16 @@ const routes = [
       { path: "tour", name: "tour", component: TourView },
     ],
   },
+  {
+    path: "/user",
+    name: "user",
+    component : MainLayout,
+    children : [
+      {path : "login", name : "login", component: () => import("@/components/users/UserLoginVue.vue")},
+      {path : "forgetPass", name : "forgetPass", component: () => import("@/components/users/FindPassVue.vue")},
+      {path : "join", name : "join", component: () => import("@/components/users/JoinUserVue.vue")},
+    ],
+  }
 ];
 
 const router = createRouter({
