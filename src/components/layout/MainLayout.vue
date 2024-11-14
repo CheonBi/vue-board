@@ -5,7 +5,7 @@
 <template>
 
     <div class="row">
-        <div class="main-content d-flex align-content-center align-self-center p-4">
+        <div class="main-content">
             <RouterView></RouterView>
         </div>
     </div>
