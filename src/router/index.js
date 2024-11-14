@@ -26,6 +26,14 @@ const routes = [
       { path: "tour", name: "tour", component: TourView },
     ],
   },
+  {
+    path: "/user",
+    name: "user",
+    component : MainLayout,
+    children : [
+      {path : "login", name : "login", component: () => import("@/components/users/UserLoginVue.vue")}
+    ],
+  }
 ];
 
 const router = createRouter({

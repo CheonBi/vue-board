@@ -1,65 +1,133 @@
 <script setup>
-    import { RouterLink } from "vue-router";
+    import { RouterLink, useRouter } from "vue-router";
+    import { ref } from 'vue';
+    const router = useRouter()
+
+    const togglevisible = ref(false);  // 사이드바/메뉴의 보임 상태를 관리
+    const toggleSidebar = () => {
+        togglevisible.value = !togglevisible.value;
+    };
+
+    const goToLogin = () => {
+        router.push({name: 'login'});
+    }
 </script>
 
 <template>
     <!-- Navbar -->
-    <header class="navbar navbar-expand-lg navbar-light bg-body-secondary sticky-top">
-        <!-- Container wrapper -->
+    <header class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-            <!-- Navbar brand -->
             <RouterLink class="navbar-brand me-2" :to="{ name: 'home' }">
-                <!-- img -->
-                <!-- <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="16" alt="MDB Logo"
-                    loading="lazy" style="margin-top: -1px;" /> -->
+                <!-- 로고 이미지 -->
             </RouterLink>
 
-            <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse justify-content-between" id="navbarButtons">
-                <!-- Left links -->
-                <ul class="navbar-nav mb-2 mb-lg-0">
-
-                    <!-- <li class="nav-item">
-                        <RouterLink class="nav-link" :to="{ name: 'home' }">홈</RouterLink>
-                    </li> -->
-
-                    <li class="nav-item fw-bold fs-6">
-                        <RouterLink class="nav-link text-black" :to="{ name: 'attraction' }">여행지</RouterLink>
-                    </li>
-
-                    <li class="nav-item fw-bold fs-6">
-                        <RouterLink class=" nav-link text-black" :to="{ name: 'planner' }">플래너</RouterLink>
-                    </li>
-
-                    <li class="nav-item fw-bold fs-6">
-                        <RouterLink class=" nav-link text-black" :to="{ name: 'tour' }">투어</RouterLink>
-                    </li>
-                </ul>
-                <!-- Left links -->
-
-                <!-- Center Home Link Image  -->
+                <!-- 왼쪽 Home 링크 이미지 -->
                 <div class="navbar-brand align-items-center justify-content-center align-self-stretch">
                     <RouterLink class="nav-link" :to="{ name: 'home' }">
-                        <img src="" alt="프로젝트 로고" />
+                        <img src="/src/assets/images/logo_.png" alt="로고" />
                     </RouterLink>
                 </div>
 
-                <!-- Center Home Link Image  -->
+                <!-- 로그인 버튼 및 햄버거 아이콘 -->
+                <div class="d-flex justify-content-between align-items-center" style="position: relative;">
+                        <!-- 로그인 및 회원가입 버튼 -->
+                        <button data-mdb-ripple-init type="button" class="btn btn-outline-primary me-3"
+                        @click="goToLogin">
+                            로그인 및 회원가입
+                        </button>
 
+                    <!-- 햄버거 메뉴 아이콘 -->
+                    <div class="pv-box" style="position: relative;">
+                        <button class="menu-icon" @click="toggleSidebar" aria-label="Toggle sidebar">
+                            <span class="bar" :class="{ 'active': togglevisible }"></span>
+                            <span class="bar" :class="{ 'active': togglevisible }"></span>
+                            <span class="bar" :class="{ 'active': togglevisible }"></span>
+                        </button>
 
-
-                <!-- Login Button -->
-                <div class="d-flex align-items-center justify-content-center align-self-stretch">
-                    <button data-mdb-ripple-init type="button" class="btn btn-outline-primary">
-                        로그인 및 회원가입
-                    </button>
+                        <!-- 사이드바 콘텐츠 (공지사항, 로그아웃 등 메뉴 항목) -->
+                        <div v-if="togglevisible" class="sidebar-content">
+                            <ul>
+                                <li><RouterLink to="/notices">공지사항</RouterLink></li>
+                                <li><RouterLink to="/logout">로그아웃</RouterLink></li>
+                                <li><RouterLink to="/settings">설정</RouterLink></li>
+                                <li><RouterLink to="/profile">내 프로필</RouterLink></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Collapsible wrapper -->
         </div>
-        <!-- Container wrapper -->
     </header>
-    <!-- Navbar -->
 </template>
 
-<style scoped></style>
+<style scoped>
+/* 기존 스타일 유지 */
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.bar {
+  background-color: #333;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.bar.active:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.bar.active:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.active:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* 사이드바 콘텐츠 위치 및 스타일 */
+.sidebar-content {
+  position: absolute;
+  top: 40px; /* menu-icon 바로 아래에 위치하도록 설정 */
+  right: 0;
+  background-color: #f8f9fa;
+  padding: 5px 10px; /* 글자 크기에 맞춰 조정 */
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  width: auto; /* 글자에 맞춰 크기 조정 */
+  min-width: 120px; /* 최소 너비 지정 (필요에 따라 조정 가능) */
+}
+
+.sidebar-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-content li {
+  margin-bottom: 10px;
+}
+
+.sidebar-content li:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-content a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar-content a:hover {
+  color: #007bff;
+}
+</style>
