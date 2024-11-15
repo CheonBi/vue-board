@@ -35,6 +35,9 @@ const routes = [
       {path : "forgetPass", name : "forgetPass", component: () => import("@/components/users/FindPassVue.vue")},
       {path : "join", name : "join", component: () => import("@/components/users/JoinUserVue.vue")},
     ],
+  },
+  {
+
   }
 ];
 
