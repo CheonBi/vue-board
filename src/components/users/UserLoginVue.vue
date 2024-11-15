@@ -1,8 +1,31 @@
 <script setup>
 import { ref } from 'vue';
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
+import axios from 'axios'
+import { useUserStore } from "@/stores/auth";
+
+const store = useUserStore();
+
 const userid = ref("")
 const password = ref("")
+const baseurl = "http://localhost"
+const router = useRouter()
+
+const login = () => {
+  var url = baseurl + '/member/login'
+  axios.post(url, {
+    userid : userid.value,
+    password : password.value
+  })
+  .then(response => {
+    console.log(response)
+    if(response.request.status === 200){
+      router.push({name : "home"})
+      store.login(response.data.userid)
+    }
+  })
+  .catch(console.error())
+}
 
 </script>
 
@@ -18,7 +41,7 @@ const password = ref("")
           </div>
         </div>
       </div>
-      <form>
+      <form @submit.prevent="login">
         <div class="login-input">
           <div class="labeled-input">
             <div class="labeled-input__label">
