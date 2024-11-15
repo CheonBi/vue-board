@@ -1,9 +1,27 @@
 <script setup>
+  import { ref, computed, watch } from "vue";
+  import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
   import MainSelectBox from "@/components/common/MainSelectBox.vue";
   import IconSearch from "@/components/icons/IconSearch.vue";
   import IconCalendar from "@/components/icons/IconCalendar.vue";
   import IconHuman from "@/components/icons/IconHuman.vue";
 
+  import { useAttractionStore } from "@/stores/attraction";
+  const store = useAttractionStore();
+  const guguns = ref([]);
+
+  watch(
+    () => store.selectedSido,
+    (newArea, oldArea) => {
+      console.log(newArea);
+      console.log(oldArea);
+      guguns.value = store.getGuguns(newArea);
+    },
+  )
+  const coordinate = {
+    lat: 33.450701,
+    lng: 126.570667
+  };
 </script>
 
 <template>
@@ -17,19 +35,47 @@
       <div class="search-box d-flex flex-column">
         <form class="search-form d-flex" role="search">
           <div class="sido-box">
-            <MainSelectBox :placeholder="`큰 지역을 선택해보세요`">
-              <template #icon>
-                <IconSearch />
-              </template>
-            </MainSelectBox>
+
+            <div class="select-box-inner">
+              <div class="select-box-lbl">
+                <div class="select-box-lbl-inner">
+                  <div class="svg-wrap">
+                    <IconSearch />
+                  </div>
+                  <div class="select-input-wrap">
+                    <select name="select" class="select-input" v-model="store.selectedSido">
+                      <template v-for="item in store.areaSido" :key="item['code']">
+                        <option :value="item['code']">{{ item['name'] }}</option>
+                      </template>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="gugun-box">
-            <MainSelectBox :placeholder="`작은 지역을 선택해보세요`">
+            <!-- <MainSelectBox :placeholder="`작은 지역을 선택해보세요`" :select-data="store.areaGugun">
               <template #icon>
                 <IconSearch />
               </template>
-            </MainSelectBox>
+            </MainSelectBox> -->
+            <div class="select-box-inner">
+              <div class="select-box-lbl">
+                <div class="select-box-lbl-inner">
+                  <div class="svg-wrap">
+                    <IconSearch />
+                  </div>
+                  <div class="select-input-wrap">
+                    <select name="select" class="select-input" v-model="store.selectedGugun">
+                      <template v-for="item in store.areaGugun" :key="item['code']">
+                        <option :value="item['guguncode']">{{ item['gugunname'] }}</option>
+                      </template>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="date-box">
@@ -47,7 +93,8 @@
             </MainSelectBox>
           </div>
           <div class="search-btn-wrap">
-            <button class="search-btn d-flex align-items-center justify-content-center" type="button">
+            <button class="search-btn d-flex align-items-center justify-content-center" type="button"
+              @click="store.getAttractions()">
               <span>검색</span>
             </button>
           </div>
@@ -63,7 +110,15 @@
 
 
   <div aria-label="middle-event">
+    <div style="min-height: 100vh;">
+      <KakaoMap :lat="coordinate.lat" :lng="coordinate.lng" :draggable="true">
+        <!-- <KakaoMapMarker v-for="attraction in store.attractions" :lat="attraction.lat" :lng="attraction.lon"
+                        :key="attraction.title">
+                    </KakaoMapMarker> -->
 
+        <KakaoMapMarker :lat="coordinate.lat" :lng="coordinate.lng"></KakaoMapMarker>
+      </KakaoMap>
+    </div>
   </div>
 
 

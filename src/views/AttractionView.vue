@@ -1,28 +1,37 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { tripAxios } from "@/middlewares/common-axios";
+    import { ref, onMounted } from "vue";
+    import VTripCard from "@/components/common/VTripCard.vue";
+    import { useAttractionStore } from "@/stores/attraction";
+    import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
+    // import { tripAxios } from "@/middlewares/common-axios";
 
-const axios = tripAxios()
-const attractions = ref([])
-const log = ref("");
-const isLoading = ref(false)
+    // const axios = tripAxios()
+    // const attractions = ref([])
+    // const log = ref("");
+    // const isLoading = ref(false)
 
-const searchAttraction = () => {
+    // const searchAttraction = () => {
 
-    axios
-        .get('trip/sido', {
-            onStart: () => (isLoading.value = true),    // 로딩 시작
-            onFinish: () => (isLoading.value = false),  // 로딩 종료
-        })
-        .then((response) => {
-            console.log(response)
-            attractions.value = response.data
-            log.value = response.request['__URL__']
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-}
+    //     axios
+    //         .get('trip/sido', {
+    //             onStart: () => (isLoading.value = true),    // 로딩 시작
+    //             onFinish: () => (isLoading.value = false),  // 로딩 종료
+    //         })
+    //         .then((response) => {
+    //             console.log(response)
+    //             attractions.value = response.data
+    //             log.value = response.request['__URL__']
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         })
+    // }
+
+    const store = useAttractionStore();
+    const coordinate = {
+        lat: 33.450701,
+        lng: 126.570667
+    };
 </script>
 
 <template>
@@ -44,15 +53,19 @@ const searchAttraction = () => {
                     </button>
                 </div>
             </div>
-            <div class="row mt-5" v-if="isLoading"></div>
-            <div class="row" v-else>
-                <template v-for="attraction in attractions" :key="attraction.contentid" :attraction="attraction">
-                    <div>
-                        {{ attraction.sidocode }} {{ attraction.sidoname }} {{ log }}
-                    </div>
-                </template>
-                <!-- <VTripCard v-for="attraction in attractions" :key="attraction.contentid" :attraction="attraction" /> -->
+            <!-- <div class="row mt-5" v-if="isLoading"></div> -->
+            <div class="d-flex w-75 flex-column">
+                <VTripCard v-for="attraction in store.attractions" :key="attraction.title" :attraction="attraction" />
             </div>
+
+            <KakaoMap :lat="coordinate.lat" :lng="coordinate.lng" :draggable="true">
+                <!-- <KakaoMapMarker v-for="attraction in store.attractions" :lat="attraction.lat" :lng="attraction.lon"
+                        :key="attraction.title">
+                    </KakaoMapMarker> -->
+
+                <KakaoMapMarker :lat="coordinate.lat" :lng="coordinate.lng"></KakaoMapMarker>
+            </KakaoMap>
+
         </div>
     </div>
 </template>
