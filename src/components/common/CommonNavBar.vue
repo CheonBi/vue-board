@@ -1,6 +1,6 @@
 <script setup>
   import { RouterLink, useRouter } from "vue-router";
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   const router = useRouter()
 
   const togglevisible = ref(false);  // 사이드바/메뉴의 보임 상태를 관리
@@ -11,7 +11,13 @@
   const goToLogin = () => {
     router.push({ name: 'login' });
   }
-
+  onMounted(() => {
+    router.beforeEach(() => {
+      if (togglevisible.value) {
+        togglevisible.value = false; // 사이드바를 닫기
+      }
+    });
+  });
 </script>
 
 <template>
@@ -56,16 +62,19 @@
               <div v-if="togglevisible" class="sidebar-content">
                 <ul>
                   <li>
-                    <RouterLink to="/notices">공지사항</RouterLink>
+                    <RouterLink to="/notices">여행지</RouterLink>
                   </li>
                   <li>
-                    <RouterLink to="/logout">로그아웃</RouterLink>
+                    <RouterLink to="/logout">숙소</RouterLink>
                   </li>
                   <li>
-                    <RouterLink to="/settings">설정</RouterLink>
+                    <RouterLink to="/settings">공지사항</RouterLink>
                   </li>
                   <li>
-                    <RouterLink to="/profile">내 프로필</RouterLink>
+                    <RouterLink to="/profile">프로필</RouterLink>
+                  </li>
+                  <li>
+                    <RouterLink to="/profile">로그아웃</RouterLink>
                   </li>
                 </ul>
               </div>
