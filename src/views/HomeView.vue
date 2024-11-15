@@ -1,8 +1,8 @@
 <script setup>
-import MainSelectBox from "@/components/common/MainSelectBox.vue";
-import IconSearch from "@/components/icons/IconSearch.vue";
-import IconCalendar from "@/components/icons/IconCalendar.vue";
-import IconHuman from "@/components/icons/IconHuman.vue";
+  import MainSelectBox from "@/components/common/MainSelectBox.vue";
+  import IconSearch from "@/components/icons/IconSearch.vue";
+  import IconCalendar from "@/components/icons/IconCalendar.vue";
+  import IconHuman from "@/components/icons/IconHuman.vue";
 
 </script>
 
@@ -10,9 +10,9 @@ import IconHuman from "@/components/icons/IconHuman.vue";
   <div class="top-search-wrap position-relative" aria-label="top-search">
     <div class="top-search container-fluid d-flex flex-column justify-content-end">
       <h1 class="main-guide">
-        <span>메인페이지 안내 문구 </span>
+        <span>내일은 어디로? </span>
         <br>
-        <span>메인페이지 안내 문구 </span>
+        <span>유람으로 떠나는 나만의 여행 </span>
       </h1>
       <div class="search-box d-flex flex-column">
         <form class="search-form d-flex" role="search">
@@ -70,88 +70,87 @@ import IconHuman from "@/components/icons/IconHuman.vue";
 </template>
 
 <style scoped>
-.top-search-wrap {
-  height: 464px;
-}
+  .top-search-wrap {
+    height: 464px;
+  }
 
-.top-search {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 11;
-  padding-bottom: 70px;
-}
+  .top-search {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 11;
+    padding-bottom: 70px;
+  }
 
-h1.main-guide {
-  font-weight: 700;
-  color: white;
-  letter-spacing: 0px;
-  line-height: 2.75rem;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
+  h1.main-guide {
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0px;
+    line-height: 2.75rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
 
-/* Search Box */
+  /* Search Box */
 
-.search-box {
-  padding: 20px;
-  /* size */
-  width: 100%;
-  border-radius: 16px;
-  background-color: white;
-  z-index: 11;
-  gap: 20px;
-}
+  .search-box {
+    padding: 20px;
+    /* size */
+    width: 100%;
+    border-radius: 16px;
+    background-color: white;
+    z-index: 11;
+    gap: 20px;
+  }
 
-.search-form {
-  height: 100%;
-  width: 100%;
-  gap: 12px;
-}
+  .search-form {
+    height: 100%;
+    width: 100%;
+    gap: 12px;
+  }
 
-.sido-box {
-  max-width: 298px;
-  flex-basis: 30%;
-}
+  .sido-box {
+    max-width: 298px;
+    flex-basis: 30%;
+  }
 
-.gugun-box {
-  max-width: 298px;
-  flex-basis: 30%;
-}
+  .gugun-box {
+    max-width: 298px;
+    flex-basis: 30%;
+  }
 
-.date-box {
-  max-width: 298px;
-  flex-basis: 35%;
-}
+  .date-box {
+    max-width: 298px;
+    flex-basis: 35%;
+  }
 
-.num-box {
-  max-width: 298px;
-  flex-basis: 30%;
-}
+  .num-box {
+    max-width: 298px;
+    flex-basis: 30%;
+  }
 
-/* Button */
-.search-btn-wrap {
-  min-width: 120px
-}
+  /* Button */
+  .search-btn-wrap {
+    min-width: 120px
+  }
 
-.search-btn {
-  /* style */
-  cursor: pointer;
-  width: 100%;
-  color: rgb(255, 255, 255);
-  background-color: rgb(18, 155, 228);
-  border-style: none;
-  padding: 10px 18px;
-  height: 48px;
-  border-radius: 10px;
-  border-width: 2px;
-  font-size: 1rem;
-  line-height: normal;
-  letter-spacing: 0px;
-  font-weight: 600;
-
-}
+  .search-btn {
+    /* style */
+    cursor: pointer;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(18, 155, 228);
+    border-style: none;
+    padding: 10px 18px;
+    height: 48px;
+    border-radius: 10px;
+    border-width: 2px;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0px;
+    font-weight: 600;
+  }
 </style>
