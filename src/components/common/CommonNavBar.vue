@@ -18,17 +18,21 @@
   <!-- Navbar -->
   <header class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
     <div class="container">
-      <RouterLink class="navbar-brand me-2" :to="{ name: 'home' }">
-        <!-- 로고 이미지 -->
-      </RouterLink>
 
+
+      <!-- 왼쪽 Home 링크 이미지 -->
       <div class="collapse navbar-collapse justify-content-between" id="navbarButtons">
-        <!-- 왼쪽 Home 링크 이미지 -->
         <div class="navbar-brand align-items-center justify-content-center align-self-stretch">
           <RouterLink class="nav-link" :to="{ name: 'home' }">
             <div class="d-flex justify-content-center">
               <img src=" /src/assets/images/logo2.svg" alt="로고" style="width: 10rem; height: 4rem;" />
             </div>
+          </RouterLink>
+        </div>
+
+        <!-- 임시 -->
+        <div class="d-flex justify-content-center">
+          <RouterLink :to="{ name: 'planner' }"> 여행계획 페이지
           </RouterLink>
         </div>
 

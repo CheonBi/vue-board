@@ -1,28 +1,28 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { tripAxios } from "@/middlewares/common-axios";
+    import { ref, onMounted } from "vue";
+    import { tripAxios } from "@/middlewares/common-axios";
 
-const axios = tripAxios()
-const attractions = ref([])
-const log = ref("");
-const isLoading = ref(false)
+    const axios = tripAxios()
+    const attractions = ref([])
+    const log = ref("");
+    const isLoading = ref(false)
 
-const searchAttraction = () => {
+    const searchAttraction = () => {
 
-    axios
-        .get('trip/sido', {
-            onStart: () => (isLoading.value = true),    // 로딩 시작
-            onFinish: () => (isLoading.value = false),  // 로딩 종료
-        })
-        .then((response) => {
-            console.log(response)
-            attractions.value = response.data
-            log.value = response.request['__URL__']
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-}
+        axios
+            .get('trip/sido', {
+                onStart: () => (isLoading.value = true),    // 로딩 시작
+                onFinish: () => (isLoading.value = false),  // 로딩 종료
+            })
+            .then((response) => {
+                console.log(response)
+                attractions.value = response.data
+                log.value = response.request['__URL__']
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 </script>
 
 <template>
