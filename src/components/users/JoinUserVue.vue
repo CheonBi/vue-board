@@ -20,6 +20,7 @@
         <!-- 이메일 인증 -->
         <div class="email-auth">
           <div>
+            <p v-if="isVerified === null" class ="auth-start">이메일 인증을 진행해주세요.</p>
             <p v-if="isVerified === false" class="auth-message">이메일을 확인하고 인증을 완료하세요.</p>
             <p v-if="isVerified === true" class="auth-message success">이메일 인증이 완료되었습니다</p>
             <div class="auth-input-group">
@@ -29,20 +30,28 @@
           </div>
         </div>
         
+        <div class="input-group">
+          <label for="username" class="input-label">이름</label>
+          <input v-bind="username" type="text" id="username" class="input-field" placeholder="이름을 입력하세요" />
+        </div>
         <!-- 아이디와 비밀번호 입력 -->
         <div class="input-group">
           <label for="userid" class="input-label">아이디</label>
-          <input type="text" id="userid" class="input-field" placeholder="아이디를 입력하세요" />
+          <input v-bind="userid" type="text" id="userid" class="input-field" placeholder="아이디를 입력하세요" />
         </div>
         
         <div class="input-group">
           <label for="password" class="input-label">비밀번호</label>
-          <input type="password" id="password" class="input-field" placeholder="비밀번호를 입력하세요" />
+          <input v-bind="password" type="password" id="password" class="input-field" placeholder="비밀번호를 입력하세요" />
+        </div>
+
+        <div class="register-btn">
+          <button>회원가입</button>
         </div>
         
       </form>
       
-      <p v-if="message" class="message">{{ message }}</p>
+      <!-- <p v-if="message" class="message">{{ message }}</p> -->
     </div>
   </div>
 </template>
@@ -51,10 +60,14 @@
 import { ref, onMounted } from "vue";
 
 export default {
+
   setup() {
+    const userid = ref("")
+    const password = ref("")
+    const username = ref("")
     const email = ref("");
     const message = ref("");
-    const isVerified = ref(false);
+    const isVerified = ref(null);
     const token = ref("");
 
     const check = () => {
@@ -107,6 +120,9 @@ export default {
       register,
       token,
       check,
+      userid,
+      username,
+      password
     };
   },
 };
@@ -175,8 +191,7 @@ export default {
 }
 
 .email-auth {
-  margin-top: 30px;
-  padding-top: 15px;
+  margin-top: 10px;
 }
 
 .auth-message {
@@ -273,5 +288,27 @@ export default {
 
 .auth-button:hover {
   background-color: #45a049;
+}
+/* 회원가입 버튼 스타일 */
+.register-btn {
+  padding: 12px 20px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+/* '이메일 인증을 진행해주세요' 메시지 스타일 */
+.auth-start {
+  font-size: 14px;
+  color: #2196f3;
+  font-weight: bold;
+  margin-top: 15px;
+  text-align: center;
 }
 </style>
