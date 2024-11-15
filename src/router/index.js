@@ -34,7 +34,18 @@ const routes = [
       {path : "login", name : "login", component: () => import("@/components/users/UserLoginVue.vue")},
       {path : "forgetPass", name : "forgetPass", component: () => import("@/components/users/FindPassVue.vue")},
       {path : "join", name : "join", component: () => import("@/components/users/JoinUserVue.vue")},
+      {path : "profile", name : "profile", component: () => import("@/components/users/ProfileVue.vue")}
     ],
+  },
+  {
+    path: "/notice",
+    name: "notice",
+    component : MainLayout,
+    children : [
+      {path : "list", name: "list", component: () => import("@/components/notice/NoticeList.vue")},
+      {path : "regist", name: "regist", component: () => import("@/components/notice/RegistNotice.vue")},
+      {path : "detail/:noticeid", name: "detail", component: () => import("@/components/notice/NoticeDetail.vue")}
+    ]
   }
 ];
 

@@ -16,6 +16,8 @@
           />
           <button type="submit" class="submit-button">인증번호 받기</button>
         </div>
+
+        
         
         <!-- 이메일 인증 -->
         <div class="email-auth">
@@ -23,34 +25,38 @@
             <p v-if="isVerified === null" class ="auth-start">이메일 인증을 진행해주세요.</p>
             <p v-if="isVerified === false" class="auth-message">이메일을 확인하고 인증을 완료하세요.</p>
             <p v-if="isVerified === true" class="auth-message success">이메일 인증이 완료되었습니다</p>
-            <div class="auth-input-group">
-              <input type="text" v-model="token" class="input-field auth-input" placeholder="인증코드를 입력하세요" />
-              <button @click="check" class="auth-button">인증하기</button>
-            </div>
+            
           </div>
         </div>
+        <div class="auth-input-group">
+              <input type="text" v-model="token" class="input-field auth-input" placeholder="인증코드를 입력하세요" />
+              <input type="button" @click="check" class="auth-button" value="인증하기"/>
+            </div>
         
         <div class="input-group">
           <label for="username" class="input-label">이름</label>
-          <input v-bind="username" type="text" id="username" class="input-field" placeholder="이름을 입력하세요" />
+          <input v-model="username" type="text" id="username" class="input-field" placeholder="이름을 입력하세요" />
         </div>
         <!-- 아이디와 비밀번호 입력 -->
         <div class="input-group">
           <label for="userid" class="input-label">아이디</label>
-          <input v-bind="userid" type="text" id="userid" class="input-field" placeholder="아이디를 입력하세요" />
+          <input v-model="userid" type="text" id="userid" class="input-field" placeholder="아이디를 입력하세요" />
         </div>
         
         <div class="input-group">
           <label for="password" class="input-label">비밀번호</label>
-          <input v-bind="password" type="password" id="password" class="input-field" placeholder="비밀번호를 입력하세요" />
+          <input v-model="password" type="password" id="password" class="input-field" placeholder="비밀번호를 입력하세요" />
         </div>
 
         <div class="register-btn">
-          <button>회원가입</button>
+          <input type="button" value="회원가입" @click="join"/>
         </div>
         
       </form>
-      
+      <!-- <div class="auth-input-group">
+              <input type="text" v-model="token" class="input-field auth-input" placeholder="인증코드를 입력하세요" />
+              <input type="button" @click="check" class="auth-button" value="인증하기"/>
+            </div> -->
       <!-- <p v-if="message" class="message">{{ message }}</p> -->
     </div>
   </div>
@@ -58,6 +64,8 @@
 
 <script>
 import { ref, onMounted } from "vue";
+import { tripAxios } from "@/middlewares/common-axios";
+import { RouterLink, useRouter } from "vue-router";
 
 export default {
 
@@ -69,8 +77,25 @@ export default {
     const message = ref("");
     const isVerified = ref(null);
     const token = ref("");
+    const axios = tripAxios();
+    const router = useRouter()
+    
+    const join = () => {
+      axios.post('/member/join',{
+        userid : userid.value,
+        username : username.value,
+        password : password.value,
+        email : email.value
+      })
+      .then(response => {
+        if(response.request.status === 200){
+          router.push({name : "home"})
+        }
+      })
+    }
 
     const check = () => {
+      console.log("check method")
       verifyEmail();
     };
 
@@ -101,10 +126,12 @@ export default {
         const data = await response.text();
         if (data === "이메일 인증이 완료되었습니다.") {
           isVerified.value = true;
+          console.log(isVerified.value)
           message.value = "";
         } else {
           message.value = data;
           isVerified.value = false;
+          console.log(isVerified.value)
         }
       } catch (error) {
         console.error(error);
@@ -122,7 +149,9 @@ export default {
       check,
       userid,
       username,
-      password
+      password,
+      join,
+      router
     };
   },
 };

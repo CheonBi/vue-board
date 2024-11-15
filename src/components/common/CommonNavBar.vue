@@ -1,8 +1,12 @@
 <script setup>
   import { RouterLink, useRouter } from "vue-router";
   import { ref, onMounted } from 'vue';
-  const router = useRouter()
+  import { useUserStore } from '@/stores/auth'
+  import { tripAxios } from "@/middlewares/common-axios";
 
+  const store = useUserStore();
+  const router = useRouter()
+  const axios = tripAxios();
   const togglevisible = ref(false);  // 사이드바/메뉴의 보임 상태를 관리
   const toggleSidebar = () => {
     togglevisible.value = !togglevisible.value;
@@ -18,6 +22,29 @@
       }
     });
   });
+
+  const logout = () => {
+    axios.post('/member/logout')
+    .then(response => {
+      if(response.request.status === 201){
+        store.logout();
+      }
+    })
+  }
+
+  const quit = () => {
+    console.log(store.id)
+    axios.delete('/member/delete',{
+      params:{
+        userid : store.id
+      }
+    })
+    .then(response => {
+      if(response.request.status === 200){
+        store.logout()
+      }
+    })
+  }
 </script>
 
 <template>
@@ -43,7 +70,8 @@
           <!-- 로그인 및 회원가입 버튼 -->
           <div class="btn-login-wrap">
             <button data-mdb-ripple-init type="button" class="btn-login btn d-flex" @click="goToLogin">
-              <span>로그인/회원가입</span>
+              <span v-if="store.isAuth === false">로그인/회원가입</span>
+              <span v-else-if="store.isAuth === true">{{ store.id }}</span>
             </button>
           </div>
 
@@ -68,13 +96,16 @@
                     <RouterLink to="/logout">숙소</RouterLink>
                   </li>
                   <li>
-                    <RouterLink to="/settings">공지사항</RouterLink>
+                    <RouterLink :to="{name : 'list'}">공지사항</RouterLink>
                   </li>
                   <li>
-                    <RouterLink to="/profile">프로필</RouterLink>
+                    <RouterLink :to="{name : 'profile'}">프로필</RouterLink>
                   </li>
                   <li>
-                    <RouterLink to="/profile">로그아웃</RouterLink>
+                    <button @click="logout">로그아웃</button>
+                  </li>
+                  <li>
+                    <button @click="quit">회원탈퇴</button>
                   </li>
                 </ul>
               </div>
